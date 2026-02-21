@@ -1,33 +1,17 @@
 version: 1
+
 frontend:
   phases:
     build:
       commands:
-        - echo "Build complete"
+        - echo "Building static site - no compilation required"
+
   artifacts:
-    baseDirectory: index.html
+    baseDirectory: ./
     files:
       - '**/*'
-  cache: []
 
-# SPA routing - redirect all routes to index.html
-rewrites:
-  - source: </^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|svg|woff|woff2|ttf|eot|json|html)$)/.*>
-    target: /index.html
-    status: 200
-
-# Cache static assets
-headers:
-  - pattern: "**/*"
-    headers:
-      - key: "X-Frame-Options"
-        value: "DENY"
-  - pattern: "**/*.html"
-    headers:
-      - key: "Cache-Control"
-        value: "no-cache, no-store, must-revalidate"
-  - pattern: "**/*.{css,js,png,jpg,svg,woff,woff2,ttf,eot}"
-    headers:
-      - key: "Cache-Control"
-        value: "max-age=31536000"
-
+  cache:
+    paths:
+      - node_modules/**/*
+      - .cache/**
