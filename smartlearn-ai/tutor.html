@@ -6,7 +6,9 @@
     <title>AI Tutor - SmartLearn AI</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -23,7 +25,7 @@
                 <li id="auth-link"><button class="btn btn-outline" onclick="openAuthModal()">Login</button></li>
                 <li id="logout-link"><button class="btn btn-outline" onclick="logout()">Logout</button></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -37,11 +39,33 @@
             <!-- Tutor Header -->
             <div class="tutor-header">
                 <div class="tutor-badge">
-                    <span class="badge-icon">🤖</span>
-                    <span class="badge-text">Powered by Amazon Bedrock</span>
+                    <i class="fas fa-robot"></i>
+                    <span>Powered by Amazon Bedrock</span>
                 </div>
                 <h1>AI Tutor</h1>
                 <p>Your personal AI learning assistant. Ask me anything about your courses!</p>
+            </div>
+
+            <!-- Topic Categories -->
+            <div class="topic-categories">
+                <button class="topic-btn" onclick="filterByTopic('all')">
+                    <i class="fas fa-th-large"></i> All Topics
+                </button>
+                <button class="topic-btn" onclick="filterByTopic('programming')">
+                    <i class="fas fa-code"></i> Programming
+                </button>
+                <button class="topic-btn" onclick="filterByTopic('data-science')">
+                    <i class="fas fa-database"></i> Data Science
+                </button>
+                <button class="topic-btn" onclick="filterByTopic('ai-ml')">
+                    <i class="fas fa-brain"></i> AI & ML
+                </button>
+                <button class="topic-btn" onclick="filterByTopic('web-dev')">
+                    <i class="fas fa-globe"></i> Web Dev
+                </button>
+                <button class="topic-btn" onclick="filterByTopic('career')">
+                    <i class="fas fa-briefcase"></i> Career
+                </button>
             </div>
 
             <!-- Chat Container -->
@@ -56,6 +80,7 @@
                             <li>💡 Problem-solving and exercises</li>
                             <li>🔍 Deep dives into any topic</li>
                             <li>📖 Study tips and strategies</li>
+                            <li>🎯 Career guidance and advice</li>
                         </ul>
                         <p>What would you like to learn today?</p>
                     </div>
@@ -76,9 +101,11 @@
                 <p class="quick-label">Try asking:</p>
                 <div class="quick-buttons">
                     <button class="quick-btn" onclick="sendQuickQuestion('What is machine learning?')">What is machine learning?</button>
-                    <button class="quick-btn" onclick="sendQuickQuestion('Explain neural networks')">Explain neural networks</button>
+                    <button class="quick-btn" onclick="sendQuickQuestion('Explain neural networks in simple terms')">Explain neural networks</button>
                     <button class="quick-btn" onclick="sendQuickQuestion('How does Python work?')">How does Python work?</button>
-                    <button class="quick-btn" onclick="sendQuickQuestion('Give me study tips')">Give me study tips</button>
+                    <button class="quick-btn" onclick="sendQuickQuestion('Give me study tips for coding')">Give me study tips</button>
+                    <button class="quick-btn" onclick="sendQuickQuestion('What are the best practices in web development?')">Web dev best practices</button>
+                    <button class="quick-btn" onclick="sendQuickQuestion('How do I start a career in data science?')">Career in data science</button>
                 </div>
             </div>
 
@@ -93,7 +120,7 @@
                         autocomplete="off"
                     >
                     <button type="submit" class="send-button">
-                        <span class="send-icon">➤</span>
+                        <span class="send-icon"><i class="fas fa-paper-plane"></i></span>
                     </button>
                 </form>
                 <p class="input-hint">Press Enter to send • AI responses are simulated for demo purposes</p>
@@ -165,6 +192,76 @@
 
     <script src="js/main.js"></script>
     <script>
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
+        // Filter by topic
+        function filterByTopic(topic) {
+            // Update active button
+            document.querySelectorAll('.topic-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.topic-btn').classList.add('active');
+            
+            // Update quick questions based on topic
+            const quickQuestions = document.querySelector('.quick-buttons');
+            const questions = {
+                'all': [
+                    'What is machine learning?',
+                    'Explain neural networks',
+                    'How does Python work?',
+                    'Give me study tips'
+                ],
+                'programming': [
+                    'What is Python?',
+                    'Explain variables in code',
+                    'How do loops work?',
+                    'What are functions?'
+                ],
+                'data-science': [
+                    'What is data analysis?',
+                    'Explain pandas library',
+                    'How to visualize data?',
+                    'What is statistics?'
+                ],
+                'ai-ml': [
+                    'What is deep learning?',
+                    'Explain AI basics',
+                    'How do neural networks learn?',
+                    'What is supervised learning?'
+                ],
+                'web-dev': [
+                    'What is HTML?',
+                    'Explain CSS basics',
+                    'How does JavaScript work?',
+                    'What is responsive design?'
+                ],
+                'career': [
+                    'How to become a developer?',
+                    'Best programming languages to learn?',
+                    'How to prepare for interviews?',
+                    'What skills do I need?'
+                ]
+            };
+            
+            // Update quick questions
+            const selectedQuestions = questions[topic] || questions.all;
+            quickQuestions.innerHTML = selectedQuestions.map(q => 
+                `<button class="quick-btn" onclick="sendQuickQuestion('${q}')">${q}</button>`
+            ).join('');
+            
+            // Add label back
+            const label = document.querySelector('.quick-label');
+            if (label) {
+                quickQuestions.insertAdjacentHTML('beforebegin', '<p class="quick-label">Try asking:</p>');
+            }
+        }
+
         // Check authentication and initialize tutor on page load
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();

@@ -6,7 +6,9 @@
     <title>Dashboard - SmartLearn AI</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -23,7 +25,7 @@
                 <li id="auth-link"><button class="btn btn-outline" onclick="openAuthModal()">Login</button></li>
                 <li id="logout-link"><button class="btn btn-outline" onclick="logout()">Logout</button></li>
             </ul>
-            <div class="mobile-menu">
+            <div class="mobile-menu" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -51,36 +53,133 @@
                 <div class="stat-card">
                     <div class="stat-icon">📚</div>
                     <div class="stat-info">
-                        <span class="stat-value">4</span>
+                        <span class="stat-value" id="stat-courses">4</span>
                         <span class="stat-label">Courses Enrolled</span>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">✅</div>
                     <div class="stat-info">
-                        <span class="stat-value">12</span>
+                        <span class="stat-value" id="stat-completed">12</span>
                         <span class="stat-label">Lessons Completed</span>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">⏱️</div>
                     <div class="stat-info">
-                        <span class="stat-value">24h</span>
+                        <span class="stat-value" id="stat-hours">24h</span>
                         <span class="stat-label">Learning Time</span>
                     </div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🎯</div>
                     <div class="stat-info">
-                        <span class="stat-value">85%</span>
+                        <span class="stat-value" id="stat-progress">85%</span>
                         <span class="stat-label">Goal Progress</span>
                     </div>
                 </div>
             </div>
 
+            <!-- Learning Goals Section -->
+            <section class="goals-section">
+                <h2><i class="fas fa-bullseye"></i> Your Learning Goals</h2>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-icon pink">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="goal-info">
+                            <h4>Complete Python Course</h4>
+                            <p>Finish all 12 modules</p>
+                        </div>
+                        <div class="goal-progress">
+                            <span class="percentage">75%</span>
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon cyan">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="goal-info">
+                            <h4>Master ML Basics</h4>
+                            <p>Complete 8 lessons</p>
+                        </div>
+                        <div class="goal-progress">
+                            <span class="percentage">60%</span>
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon amber">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <div class="goal-info">
+                            <h4>Earn Certificate</h4>
+                            <p>Complete final project</p>
+                        </div>
+                        <div class="goal-progress">
+                            <span class="percentage">40%</span>
+                        </div>
+                    </div>
+                    <div class="goal-card">
+                        <div class="goal-icon green">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="goal-info">
+                            <h4>AI Chat Sessions</h4>
+                            <p>50 tutor chats this month</p>
+                        </div>
+                        <div class="goal-progress">
+                            <span class="percentage">90%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section class="achievements-section">
+                <h2><i class="fas fa-trophy"></i> Your Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-badge">
+                        <div class="achievement-icon">🌟</div>
+                        <div class="achievement-info">
+                            <h4>Quick Learner</h4>
+                            <p>5 lessons in one day</p>
+                        </div>
+                    </div>
+                    <div class="achievement-badge">
+                        <div class="achievement-icon">🔥</div>
+                        <div class="achievement-info">
+                            <h4>7 Day Streak</h4>
+                            <p>Learning every day</p>
+                        </div>
+                    </div>
+                    <div class="achievement-badge">
+                        <div class="achievement-icon">💬</div>
+                        <div class="achievement-info">
+                            <h4>Curious Mind</h4>
+                            <p>50 AI tutor chats</p>
+                        </div>
+                    </div>
+                    <div class="achievement-badge locked">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <h4>Course Master</h4>
+                            <p>Complete 10 courses</p>
+                        </div>
+                    </div>
+                    <div class="achievement-badge locked">
+                        <div class="achievement-icon">🎓</div>
+                        <div class="achievement-info">
+                            <h4>Graduate</h4>
+                            <p>Earn first certificate</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Learning Level Selector -->
             <div class="level-selector">
-                <h3>Change Learning Level (Simulate Amazon Personalize)</h3>
+                <h3><i class="fas fa-sliders-h"></i> Change Learning Level (Simulate Amazon Personalize)</h3>
                 <div class="level-buttons">
                     <button class="level-btn" data-level="beginner" onclick="changeLevel('beginner')">
                         <span class="level-icon">🌱</span>
@@ -129,6 +228,49 @@
                 </div>
             </section>
 
+            <!-- Recent Activity Section -->
+            <section class="activity-section">
+                <h2><i class="fas fa-history"></i> Recent Activity</h2>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Completed "Python Basics" Lesson</h4>
+                            <p>2 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon started">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Started "Data Structures" Course</h4>
+                            <p>5 hours ago</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon achieved">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Earned "Quick Learner" Badge</h4>
+                            <p>Yesterday</p>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon completed">
+                            <i class="fas fa-comment-dots"></i>
+                        </div>
+                        <div class="activity-content">
+                            <h4>Chat session with AI Tutor</h4>
+                            <p>Yesterday</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- AI Tutor CTA -->
             <section class="ai-tutor-cta">
                 <div class="cta-content">
@@ -170,10 +312,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 SmartLearn AI. All rights reserved. Demo Project.</p>
-            </div>
+                <p>&copy; 2024 SmartLearn AI. All rights reserved. Demo Project </div>
         </div>
-    </footer>
+   .</p>
+            </footer>
 
     <!-- Auth Modal -->
     <div class="modal" id="auth-modal">
@@ -207,6 +349,14 @@
 
     <script src="js/main.js"></script>
     <script>
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const navLinks = document.querySelector('.nav-links');
+            mobileMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        }
+
         // Check authentication on page load
         document.addEventListener('DOMContentLoaded', function() {
             checkAuth();
