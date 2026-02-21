@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SmartLearn AI</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">SmartLearn AI</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="tutor.html" id="nav-tutor">AI Tutor</a></li>
+                <li id="auth-link"><button class="btn btn-outline" onclick="openAuthModal()">Login</button></li>
+                <li id="logout-link"><button class="btn btn-outline" onclick="logout()">Logout</button></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard">
+        <div class="container">
+            <!-- Welcome Section -->
+            <div class="welcome-section">
+                <div class="welcome-text">
+                    <h1>Welcome back, <span id="user-name">Learner</span>! 👋</h1>
+                    <p>Your personalized learning journey continues. Here's your progress and recommendations.</p>
+                </div>
+                <div class="user-level-badge">
+                    <span class="level-label">Your Level:</span>
+                    <span class="level-value" id="user-level">Beginner</span>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-info">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Courses Enrolled</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Lessons Completed</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-info">
+                        <span class="stat-value">24h</span>
+                        <span class="stat-label">Learning Time</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-info">
+                        <span class="stat-value">85%</span>
+                        <span class="stat-label">Goal Progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Level Selector -->
+            <div class="level-selector">
+                <h3>Change Learning Level (Simulate Amazon Personalize)</h3>
+                <div class="level-buttons">
+                    <button class="level-btn" data-level="beginner" onclick="changeLevel('beginner')">
+                        <span class="level-icon">🌱</span>
+                        <span>Beginner</span>
+                    </button>
+                    <button class="level-btn" data-level="intermediate" onclick="changeLevel('intermediate')">
+                        <span class="level-icon">🌿</span>
+                        <span>Intermediate</span>
+                    </button>
+                    <button class="level-btn" data-level="advanced" onclick="changeLevel('advanced')">
+                        <span class="level-icon">🌳</span>
+                        <span>Advanced</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recommended Courses Section -->
+            <section class="courses-section">
+                <div class="section-header">
+                    <h2>📖 Recommended Courses</h2>
+                    <p>Based on your learning level and preferences (Powered by Amazon Personalize simulation)</p>
+                </div>
+                <div class="courses-grid" id="courses-container">
+                    <!-- Courses will be dynamically inserted by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Continue Learning Section -->
+            <section class="continue-section">
+                <h2>🔄 Continue Learning</h2>
+                <div class="course-progress-card">
+                    <div class="course-info">
+                        <h3>Introduction to Machine Learning</h3>
+                        <p>Chapter 3: Neural Networks Basics</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-label">
+                            <span>Progress</span>
+                            <span>65%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Continue Course</button>
+                </div>
+            </section>
+
+            <!-- AI Tutor CTA -->
+            <section class="ai-tutor-cta">
+                <div class="cta-content">
+                    <div class="cta-icon">🤖</div>
+                    <div class="cta-text">
+                        <h2>Need Help? Chat with AI Tutor</h2>
+                        <p>Get instant answers to your questions from our AI-powered tutor, powered by Amazon Bedrock.</p>
+                    </div>
+                    <a href="tutor.html" class="btn btn-primary btn-large">Open AI Tutor</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🎓</span>
+                    <span class="logo-text">SmartLearn AI</span>
+                    <p>Revolutionizing education with AI-powered personalized learning experiences.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="tutor.html">AI Tutor</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>AWS Services</h4>
+                    <ul>
+                        <li><span>Amazon Bedrock</span></li>
+                        <li><span>Amazon Personalize</span></li>
+                        <li><span>AWS Amplify</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SmartLearn AI. All rights reserved. Demo Project.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Auth Modal -->
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="auth-modal-title">Welcome to SmartLearn AI</h2>
+                <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Login Form -->
+                <form id="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-name">Your Name</label>
+                        <input type="text" id="login-name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-level">Learning Level</label>
+                        <select id="login-level" required>
+                            <option value="">Select your level</option>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Start Learning</button>
+                    <p class="form-footer">Demo: No real authentication required</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Check authentication on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadRecommendedCourses();
+        });
+    </script>
+</body>
+</html>
