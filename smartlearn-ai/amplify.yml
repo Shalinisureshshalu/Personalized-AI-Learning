@@ -7,7 +7,7 @@ frontend:
         - echo "Building static site - no compilation required"
 
   artifacts:
-    baseDirectory: ./
+    baseDirectory: ./index.html
     files:
       - '**/*'
 
