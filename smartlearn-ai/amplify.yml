@@ -1,51 +1,66 @@
-# ==============================================
-# AWS Amplify Configuration for SmartLearn AI
-# ==============================================
-# This file configures AWS Amplify for deploying
-# our static website with simulated AWS services
-
 version: 1
 
 frontend:
   phases:
-    # Pre-build phase - install dependencies (if needed)
     preBuild:
       commands:
-        - echo "No pre-build dependencies required for static HTML/CSS/JS"
+        - echo "No dependencies required for static site"
     
-    # Build phase - no build step needed for static files
     build:
       commands:
-        - echo "Building static site..."
-        - ls -la
-        - echo "Build complete - static files ready"
-  
+        - echo "Build complete"
+
   artifacts:
-    # Base directory containing the static files
-    baseDirectory: .
-    # All files to be deployed
+    baseDirectory: ./index.html
     files:
       - '**/*'
-  
-  # Cache configuration for faster builds
+
   cache:
     paths: []
 
-# Custom headers for better performance
-headers:
-  - pattern: "**/*"
-    headers:
-      - key: "X-Frame-Options"
-        value: "DENY"
-      - key: "X-Content-Type-Options"
-        value: "nosniff"
-      - key: "X-XSS-Protection"
-        value: "1; mode=block"
-      - key: "Referrer-Policy"
-        value: "strict-origin-when-cross-origin"
-
-# Rewrites and redirects for SPA behavior (if needed)
+# SPA routing - redirect all routes to index.html
 rewrites:
   - source: </^[^.]+$|\.(?!(css|gif|ico|jpg|js|png|svg|woff|woff2|ttf|eot|json|html)$)/.*>
     target: /index.html
     status: 200
+
+# Security headers and caching
+headers:
+  - pattern: "**/*.html"
+    headers:
+      - key: "Cache-Control"
+        value: "no-cache, no-store, must-revalidate"
+      - key: "X-Frame-Options"
+        value: "DENY"
+      - key: "X-Content-Type-Options"
+        value: "nosniff"
+  - pattern: "**/*.css"
+    headers:
+      - key: "Cache-Control"
+        value: "max-age=31536000"
+      - key: "X-Frame-Options"
+        value: "DENY"
+  - pattern: "**/*.js"
+    headers:
+      - key: "Cache-Control"
+        value: "max-age=31536000"
+      - key: "X-Frame-Options"
+        value: "DENY"
+  - pattern: "**/*.png"
+    headers:
+      - key: "Cache-Control"
+        value: "max-age=31536000"
+  - pattern: "**/*.jpg"
+    headers:
+      - key: "Cache-Control"
+        value: "max-age=31536000"
+  - pattern: "**/*.svg"
+    headers:
+      - key: "Cache-Control"
+        value: "max-age=31536000"
+  - pattern: "**/*"
+    headers:
+      - key: "X-XSS-Protection"
+        value: "1; mode=block"
+      - key: "Referrer-Policy"
+        value: "strict-origin-when-cross-origin"
